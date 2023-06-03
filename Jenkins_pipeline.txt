@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Get source code from Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Shubhampujari11/Installations.git'
+                }
+        }
+        
+        stage('Execute Ansible') {
+        steps {
+            ansiblePlaybook credentialsId: 'Jenkins-Ansible', inventory: 'inventory', playbook: 'playbook.yml'
+            }
+        }
+        
+    }
+}
